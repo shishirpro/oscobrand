@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>চেকআউট — OSCO Brand</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="./output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 pt-[64px] pb-[92px] md:pb-6">
+
+<!-- OVERLAY -->
+<div id="overlay" onclick="closeAll()" class="overlay fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none"></div>
+
+<!-- SIMPLE HEADER (checkout focus) -->
+<header class="fixed top-0 inset-x-0 z-40 bg-white shadow-sm">
+  <div class="max-w-6xl mx-auto px-3 md:px-4 h-16 flex items-center justify-between">
+    <a href="cart.html" class="flex items-center gap-2 text-gray-600 font-semibold text-sm"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="m15 18-6-6 6-6"/></svg>কার্টে ফিরুন</a>
+    <a href="index.html"><img src="./img/logo.webp" class="h-9 md:h-11 w-auto object-contain"></a>
+    <div class="flex items-center gap-1.5 text-osco-green font-semibold text-sm"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="hidden sm:inline">নিরাপদ চেকআউট</span></div>
+  </div>
+</header>
+
+<!-- STEP INDICATOR -->
+<div class="bg-white border-b border-b-gray-200">
+  <div class="max-w-6xl mx-auto px-3 md:px-4 py-3 flex items-center justify-center gap-2 text-[12px] font-semibold">
+    <span class="flex items-center gap-1.5 text-osco-green"><span class="w-6 h-6 rounded-full bg-osco-green text-white grid place-items-center">✓</span>কার্ট</span>
+    <span class="w-8 h-0.5 bg-osco-green"></span>
+    <span class="flex items-center gap-1.5 text-osco-green"><span class="w-6 h-6 rounded-full bg-osco-green text-white grid place-items-center">২</span>চেকআউট</span>
+    <span class="w-8 h-0.5 bg-gray-200"></span>
+    <span class="flex items-center gap-1.5 text-gray-400"><span class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 grid place-items-center">৩</span>সম্পন্ন</span>
+  </div>
+</div>
+
+<main class="max-w-6xl mx-auto px-3 md:px-4 mt-4">
+  <div class="grid lg:grid-cols-3 gap-4 items-start">
+
+    <!-- ===== LEFT: forms ===== -->
+    <div class="lg:col-span-2 space-y-4">
+
+      <!-- delivery info -->
+      <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <h2 class="font-bold text-lg mb-3 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-osco-green text-white text-xs grid place-items-center">১</span>ডেলিভারি তথ্য</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div><label class="text-[13px] font-semibold text-gray-600">পুরো নাম *</label><input placeholder="আপনার নাম" class="mt-1 w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-osco-green"></div>
+          <div><label class="text-[13px] font-semibold text-gray-600">মোবাইল নম্বর *</label><div class="mt-1 flex items-center border border-gray-200 rounded-xl overflow-hidden focus-within:border-osco-green"><span class="px-3 py-2.5 bg-gray-100 text-gray-600 text-sm font-semibold">+৮৮</span><input inputmode="numeric" placeholder="01XXXXXXXXX" class="flex-1 px-3 py-2.5 outline-none text-sm"></div></div>
+          <div class="sm:col-span-2"><label class="text-[13px] font-semibold text-gray-600">সম্পূর্ণ ঠিকানা *</label><textarea rows="2" placeholder="বাসা/হোল্ডিং, রোড, এলাকা" class="mt-1 w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-osco-green resize-none"></textarea></div>
+          <div><label class="text-[13px] font-semibold text-gray-600">জেলা *</label>
+            <select class="mt-1 w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-osco-green bg-white"><option>জেলা নির্বাচন করুন</option><option>ঢাকা</option><option>গাইবান্ধা</option><option>রংপুর</option><option>বগুড়া</option><option>চট্টগ্রাম</option></select></div>
+          <div><label class="text-[13px] font-semibold text-gray-600">থানা / উপজেলা *</label><input placeholder="থানা" class="mt-1 w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-osco-green"></div>
+        </div>
+      </section>
+
+      <!-- delivery method -->
+      <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <h2 class="font-bold text-lg mb-3 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-osco-green text-white text-xs grid place-items-center">২</span>ডেলিভারি মাধ্যম</h2>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 border-2 border-osco-green bg-green-50 rounded-xl p-3 cursor-pointer">
+            <input type="radio" name="delivery" checked class="accent-osco-green w-4 h-4">
+            <span class="text-xl">🏢</span>
+            <div class="flex-1"><p class="text-sm font-bold text-gray-800">কুরিয়ার অফিসে ডেলিভারি</p><p class="text-[12px] text-gray-500">২-৩ কর্মদিবস</p></div>
+            <span class="text-sm font-bold text-osco-green">ফ্রি</span>
+          </label>
+          <label class="flex items-center gap-3 border-2 border-gray-200 rounded-xl p-3 cursor-pointer">
+            <input type="radio" name="delivery" class="accent-osco-green w-4 h-4">
+            <span class="text-xl">🏠</span>
+            <div class="flex-1"><p class="text-sm font-bold text-gray-800">হোম ডেলিভারি</p><p class="text-[12px] text-gray-500">১-২ কর্মদিবস</p></div>
+            <span class="text-sm font-bold text-gray-700">৳৬০</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- payment method -->
+      <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <h2 class="font-bold text-lg mb-3 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-osco-green text-white text-xs grid place-items-center">৩</span>পেমেন্ট মাধ্যম</h2>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 border-2 border-osco-green bg-green-50 rounded-xl p-3 cursor-pointer">
+            <input type="radio" name="pay" checked class="accent-osco-green w-4 h-4">
+            <span class="text-xl">💵</span>
+            <div class="flex-1"><p class="text-sm font-bold text-gray-800">ক্যাশ অন ডেলিভারি</p><p class="text-[12px] text-gray-500">পণ্য হাতে পেয়ে টাকা পরিশোধ</p></div>
+          </label>
+          <label class="flex items-center gap-3 border-2 border-gray-200 rounded-xl p-3 cursor-pointer">
+            <input type="radio" name="pay" class="accent-osco-green w-4 h-4">
+            <span class="text-xl">📱</span>
+            <div class="flex-1"><p class="text-sm font-bold text-gray-800">বিকাশ / নগদ / রকেট</p><p class="text-[12px] text-gray-500">মোবাইল ব্যাংকিং</p></div>
+            <div class="flex gap-1"><span class="text-[10px] font-bold bg-pink-100 text-pink-600 px-1.5 py-0.5 rounded">bKash</span><span class="text-[10px] font-bold bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded">Nagad</span></div>
+          </label>
+          <label class="flex items-center gap-3 border-2 border-gray-200 rounded-xl p-3 cursor-pointer">
+            <input type="radio" name="pay" class="accent-osco-green w-4 h-4">
+            <span class="text-xl">💳</span>
+            <div class="flex-1"><p class="text-sm font-bold text-gray-800">কার্ড পেমেন্ট</p><p class="text-[12px] text-gray-500">Visa / Mastercard</p></div>
+          </label>
+        </div>
+        <!-- wallet apply -->
+        <label class="flex items-center gap-3 mt-3 bg-osco-cream border border-osco-yellow/40 rounded-xl p-3 cursor-pointer">
+          <input type="checkbox" class="accent-osco-green w-4 h-4">
+          <span class="text-xl">👛</span>
+          <div class="flex-1"><p class="text-sm font-bold text-gray-800">ওয়ালেট ব্যালেন্স ব্যবহার করুন</p><p class="text-[12px] text-gray-500">উপলব্ধ: <b class="text-osco-green">৳২৫০</b></p></div>
+          <span class="text-sm font-bold text-osco-green">−৳২৫০</span>
+        </label>
+      </section>
+
+      <!-- note -->
+      <section class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <label class="text-[13px] font-semibold text-gray-600">অর্ডার নোট (ঐচ্ছিক)</label>
+        <textarea rows="2" placeholder="বিশেষ কোনো নির্দেশনা থাকলে লিখুন..." class="mt-1 w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-osco-green resize-none"></textarea>
+      </section>
+    </div>
+
+    <!-- ===== RIGHT: order summary (sticky) ===== -->
+    <div class="lg:sticky lg:top-[80px] space-y-3">
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <h2 class="font-bold text-lg mb-3">অর্ডার সামারি</h2>
+        <!-- items -->
+        <div class="space-y-3 max-h-56 overflow-y-auto pr-1">
+          <div class="flex gap-3"><div class="relative shrink-0"><img src="./img/product4.webp" class="w-14 h-14 object-contain rounded-lg bg-gray-50"><span class="absolute -top-1.5 -right-1.5 bg-gray-700 text-white text-[10px] font-bold w-5 h-5 rounded-full grid place-items-center">১</span></div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold text-gray-800 clamp-2 leading-tight">প্রিমিয়াম চিনিগুড়া চাল</p><p class="text-[11px] text-gray-500">১ কেজি</p></div><span class="text-sm font-bold text-gray-800">৳১৪৫</span></div>
+          <div class="flex gap-3"><div class="relative shrink-0"><img src="./img/product1.webp" class="w-14 h-14 object-contain rounded-lg bg-gray-50"><span class="absolute -top-1.5 -right-1.5 bg-gray-700 text-white text-[10px] font-bold w-5 h-5 rounded-full grid place-items-center">১</span></div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold text-gray-800 clamp-2 leading-tight">ব্ল্যাক রাইস (Black Rice)</p><p class="text-[11px] text-gray-500">৫০০ গ্রাম</p></div><span class="text-sm font-bold text-gray-800">৳১৮০</span></div>
+          <div class="flex gap-3 items-center"><img src="./img/product2.webp" class="w-14 h-14 object-contain rounded-lg bg-green-50 shrink-0"><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold text-osco-green-dark clamp-2 leading-tight">🎁 ফ্রি গিফট: OSCO মধু</p><p class="text-[11px] text-gray-500">উপহার</p></div><span class="text-xs font-bold text-osco-green">FREE</span></div>
+        </div>
+        <!-- totals -->
+        <div class="border-t mt-3 pt-3 space-y-2 text-sm border-t-gray-200">
+          <div class="flex justify-between text-gray-600"><span>সাবটোটাল</span><span class="line-through text-gray-400">৳৪০০</span></div>
+          <div class="flex justify-between text-gray-600"><span>প্রোডাক্ট ছাড়</span><span class="text-osco-green">−৳৭৫</span></div>
+          <div class="flex justify-between text-gray-600"><span>ডেলিভারি</span><span class="text-osco-green font-semibold">ফ্রি</span></div>
+          <div class="flex justify-between text-gray-600"><span>ওয়ালেট</span><span class="text-osco-green">−৳০</span></div>
+          <div class="flex justify-between font-extrabold text-lg pt-2 border-t border-t-gray-200"><span>সর্বমোট</span><span class="text-osco-green-dark">৳৩২৫</span></div>
+        </div>
+        <div class="text-center text-[12px] font-bold text-osco-green bg-green-50 rounded-lg py-1.5 mt-3">🎉 আপনি সাশ্রয় করছেন ৳৩৫০</div>
+        <button onclick="placeOrder()" class="mt-3 w-full py-3.5 rounded-full font-extrabold text-white text-base bg-osco-green hover:bg-osco-green-dark shadow">অর্ডার কনফার্ম করুন</button>
+        <div class="flex items-center justify-center gap-2 mt-3 text-[11px] text-gray-400"><span>🔒 SSL সুরক্ষিত</span><span>•</span><span>↩️ সহজ রিটার্ন</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="h-8"></div>
+</main>
+
+<!-- STICKY MOBILE ORDER BAR -->
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white border-t shadow-[0_-4px_16px_rgba(0,0,0,.1)] px-3 py-2.5 flex items-center gap-3 border-t-gray-200">
+  <div><p class="text-[11px] text-gray-500">সর্বমোট</p><p class="text-osco-green-dark font-extrabold text-lg leading-none">৳৩২৫</p></div>
+  <button onclick="placeOrder()" class="flex-1 text-center py-3 rounded-full bg-osco-green hover:bg-osco-green-dark text-white font-extrabold">অর্ডার কনফার্ম করুন</button>
+</div>
+
+<!-- ===== SUCCESS POPUP ===== -->
+<div id="success" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative w-full max-w-sm bg-white rounded-3xl overflow-hidden pop-in text-center">
+    <div class="p-6 text-white" style="background:linear-gradient(135deg,#16a34a,#1560bd)"><div class="text-6xl mb-2">🎉</div><h3 class="text-2xl font-extrabold">অর্ডার সফল হয়েছে!</h3><p class="text-sm opacity-90 mt-1">আপনার অর্ডারটি গ্রহণ করা হয়েছে</p></div>
+    <div class="p-6">
+      <p class="text-gray-500 text-sm">অর্ডার নম্বর</p>
+      <p class="text-2xl font-extrabold text-osco-green-dark">#OSCO-25714</p>
+      <p class="text-[13px] text-gray-500 mt-3">আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব। ধন্যবাদ OSCO Brand এর সাথে থাকার জন্য! 🌿</p>
+      <div class="mt-4 bg-osco-cream rounded-xl py-2 text-[13px] font-bold text-osco-green-dark">💳 ৳৫০ ক্যাশব্যাক আপনার ওয়ালেটে যোগ হয়েছে</div>
+      <a href="index.html" class="mt-4 block py-3 rounded-full bg-osco-green hover:bg-osco-green-dark text-white font-extrabold">শপিং চালিয়ে যান</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FLOATING CONTACT FAB (speed-dial, আর্ক) ==================== -->
+<div class="fixed right-5 bottom-7 z-40">
+  <div id="fab-opts" class="absolute right-1 bottom-1">
+    <a href="https://wa.me/8801700000000" title="WhatsApp" class="fab-item w-11 h-11 rounded-full bg-osco-green text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5s-.2.3-.3.5l-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1.2-.2.7-.8.9-1 .2-.3.4-.2.6-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3.1.1.1.6-.1 1.1z"/></svg></a>
+    <a href="tel:+8801700000000" title="কল করুন" class="fab-item w-11 h-11 rounded-full bg-osco-blue text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2z"/></svg></a>
+    <a href="https://m.me/oscobrand" title="Messenger" class="fab-item w-11 h-11 rounded-full bg-osco-blue-dark text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m22 2-7 20-4-9-9-4z"/></svg></a>
+    <a href="https://wa.me/8801700000000" title="অভিযোগ" class="fab-item w-11 h-11 rounded-full bg-osco-yellow text-gray-900 grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4H4a2 2 0 0 0-2 2v14l4-4h12a2 2 0 0 0 2-2v-3M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></a>
+    <a href="index.html" title="লগইন" class="fab-item w-11 h-11 rounded-full bg-osco-red text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></a>
+  </div>
+  <div class="relative w-14 h-14">
+    <span class="absolute inset-0 rounded-full bg-osco-green/30 animate-ping"></span>
+    <button id="fab-btn" onclick="toggleFab()" class="relative w-14 h-14 rounded-full bg-osco-green hover:bg-osco-green-dark text-white grid place-items-center shadow-xl">
+      <svg id="fab-ic-chat" class="absolute transition-opacity duration-200" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.5-.7L3 21l1.4-4.4A8.4 8.4 0 1 1 21 11.5z"/><path stroke-linecap="round" d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
+      <svg id="fab-ic-close" class="absolute transition-opacity duration-200 opacity-0" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  function closeAll(){}
+  function placeOrder(){ $('success').classList.remove('hidden'); $('success').classList.add('flex'); document.body.style.overflow='hidden'; }
+
+  // ==== floating contact FAB (speed-dial, আর্ক) ====
+  let fabOpen = false;
+  function toggleFab(){
+    fabOpen = !fabOpen;
+    $('fab-opts').classList.toggle('fab-open', fabOpen);
+    $('fab-ic-chat').classList.toggle('opacity-0', fabOpen);
+    $('fab-ic-close').classList.toggle('opacity-0', !fabOpen);
+  }
+</script>
+</body>
+</html>

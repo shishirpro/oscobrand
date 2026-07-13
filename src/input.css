@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* Scan all HTML files for class names */
+@source "./**/*.html";
+
+/* ---- OSCO brand tokens (from logo colours) ---- */
+@theme {
+  --color-osco-blue: #1560bd;
+  --color-osco-blue-dark: #0f4a94;
+  --color-osco-red: #e02424;
+  --color-osco-yellow: #ffd400;
+  --color-osco-yellow-dark: #f2c200;
+  --color-osco-green: #16a34a;
+  --color-osco-green-dark: #11833c;
+  --color-osco-cream: #fff9ec;
+
+  --font-sans: "OscoDigits", "Hind Siliguri", "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ============================================================
+   সংখ্যার আলাদা ফন্ট — শুধু ০-৯ (বাংলা) ও 0-9 (ইংরেজি)
+   গ্লিফের জন্য Baloo Da 2 ম্যাপ করা হয়েছে। unicode-range এর
+   কারণে বাকি সব অক্ষর Hind Siliguri তেই থাকবে।
+   ============================================================ */
+@font-face {
+  font-family: "OscoDigits";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: local("Baloo Da 2"),
+       url(https://fonts.gstatic.com/s/balooda2/v26/2-c39J9j0IaUMQZwAJyJaOX1UUnf3GLnYjDVtjNe.ttf) format("truetype");
+  /* 0-9 latin digits + ০-৯ bengali digits (U+09E6–U+09EF) */
+  unicode-range: U+0030-0039, U+09E6-09EF;
+}
+
+/* ============================================================
+   Small helpers & animations (design only)
+   ============================================================ */
+
+/* hide scrollbar on horizontal strips */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* line clamp */
+.clamp-2 { display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+/* auto side-scrolling category marquee */
+@keyframes osco-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { display:flex; width:max-content; animation: osco-marquee 22s linear infinite; }
+
+/* progress bar shimmer */
+@keyframes shimmer { from { background-position:-200% 0; } to { background-position:200% 0; } }
+.progress-fill {
+  background:linear-gradient(90deg,var(--color-osco-green),#22c55e,var(--color-osco-green));
+  background-size:200% 100%; animation:shimmer 2.2s linear infinite;
+}
+
+/* notification dot pulse */
+@keyframes ping-dot { 75%,100% { transform:scale(2.2); opacity:0; } }
+.ping-dot { animation: ping-dot 1.4s cubic-bezier(0,0,.2,1) infinite; }
+
+/* popup pop-in */
+@keyframes pop-in { from { transform:scale(.85); opacity:0; } to { transform:scale(1); opacity:1; } }
+.pop-in { animation: pop-in .3s cubic-bezier(.34,1.56,.64,1); }
+
+/* drawer + panel transitions */
+.drawer { transition: transform .32s cubic-bezier(.4,0,.2,1); }
+.overlay { transition: opacity .3s ease; }
+
+/* smooth scroll for category jump links */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "OscoDigits", "Hind Siliguri", "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* সব বাটন ও ক্লিকযোগ্য এলিমেন্টে hand (pointer) cursor */
+  button,
+  a,
+  label,
+  select,
+  [onclick],
+  [role="button"] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+/* ============================================================
+   বর্ডার বেশি স্পষ্ট করা — হালকা gray-100/200 বর্ডার প্রায় দেখা
+   যেত না। নিচের নিয়মগুলো কোনো @layer এর বাইরে, তাই সব ইউটিলিটির
+   উপরে জেতে (ব্যাকগ্রাউন্ড অক্ষত থাকবে, শুধু বর্ডার রঙ বদলাবে)।
+   ============================================================ */
+.border-gray-100 { border-color: #e2e5ea; }   /* নরম হালকা ধূসর — স্পষ্ট কিন্তু হালকা */
+.border-gray-200 { border-color: #d0d5dd; }   /* মাঝারি নরম ধূসর — কালচে নয় */
+/* side-specific borders একই নরম ধূসর রঙ পাবে */
+.border-t-gray-200 { border-top-color: #d0d5dd; }
+.border-b-gray-200 { border-bottom-color: #d0d5dd; }
+
+/* ============================================================
+   সাইড মেনু accordion সাবমেনু + মোবাইল সার্চ টগল
+   ============================================================ */
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .32s cubic-bezier(.4,0,.2,1);
+}
+.submenu.open { max-height: 420px; }
+.sub-chev { transition: transform .3s ease; }
+.sub-open .sub-chev { transform: rotate(90deg); }
+
+#msearch {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+#msearch.open { max-height: 80px; }
+
+/* collapsible কুপন (Enter special code স্টাইল) */
+.coupon-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .32s cubic-bezier(.4,0,.2,1);
+}
+.coupon-body.open { max-height: 200px; }
+.cpn-chev { transition: transform .3s ease; }
+.cpn-open .cpn-chev { transform: rotate(180deg); }
+
+/* ============================================================
+   ডেস্কটপ ড্রপডাউন মেনু (hover) — pure CSS
+   ============================================================ */
+.menu-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+  pointer-events: none;
+}
+.menu-item:hover .menu-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ============================================================
+   Speed-dial FAB — অপশনগুলো আর্ক (গোলাকার) করে ছড়ায়
+   ============================================================ */
+#fab-opts .fab-item {
+  position: absolute;
+  right: 6px;                 /* ৪৪px আইকন ৫৬px বাটনের কেন্দ্রে বসে */
+  bottom: 6px;
+  transform: translate(0, 0) scale(.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .34s cubic-bezier(.34,1.56,.64,1), opacity .25s ease;
+}
+#fab-opts.fab-open .fab-item { opacity: 1; pointer-events: auto; }
+/* চতুর্থাংশ বৃত্ত: উপর → বাম দিকে ৫টি অবস্থান (বেশি গ্যাপে ছড়ায়) */
+#fab-opts.fab-open .fab-item:nth-child(1) { transform: translate(0, -116px)    scale(1); }
+#fab-opts.fab-open .fab-item:nth-child(2) { transform: translate(-44px, -107px) scale(1); }
+#fab-opts.fab-open .fab-item:nth-child(3) { transform: translate(-82px, -82px)  scale(1); }
+#fab-opts.fab-open .fab-item:nth-child(4) { transform: translate(-107px, -44px) scale(1); }
+#fab-opts.fab-open .fab-item:nth-child(5) { transform: translate(-116px, 0)     scale(1); }
+/* খোলার সময় ধাপে ধাপে (stagger) */
+#fab-opts.fab-open .fab-item:nth-child(1) { transition-delay: .02s; }
+#fab-opts.fab-open .fab-item:nth-child(2) { transition-delay: .05s; }
+#fab-opts.fab-open .fab-item:nth-child(3) { transition-delay: .08s; }
+#fab-opts.fab-open .fab-item:nth-child(4) { transition-delay: .11s; }
+#fab-opts.fab-open .fab-item:nth-child(5) { transition-delay: .14s; }

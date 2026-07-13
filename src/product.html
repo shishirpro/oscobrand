@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>প্রিমিয়াম চিনিগুড়া চাল — OSCO Brand</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="./output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 pt-[70px] md:pt-[116px] pb-[70px] md:pb-6">
+
+<!-- OVERLAY -->
+<div id="overlay" onclick="closeAll()" class="overlay fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none"></div>
+
+<!-- HEADER -->
+<header id="header" class="fixed top-0 inset-x-0 z-40 bg-white shadow-sm transition-transform duration-300">
+  <div class="max-w-6xl mx-auto px-3 md:px-4"><div class="flex items-center gap-3 md:gap-5 py-2">
+    <button onclick="openMenu()" class="md:hidden p-1.5 -ml-1 text-gray-700 shrink-0 w-10"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <a href="index.html" class="shrink-0 mx-auto md:mx-0"><img src="./img/logo.webp" class="h-9 md:h-12 w-auto object-contain"></a>
+    <form onsubmit="return doSearch(event)" class="hidden md:block flex-1"><div class="flex items-center bg-gray-100 rounded-full overflow-hidden border border-gray-200 focus-within:border-osco-green"><input name="q" type="search" placeholder="পণ্য খুঁজুন..." class="flex-1 bg-transparent px-4 py-2.5 text-sm outline-none min-w-0"><button class="px-4 py-2.5 text-gray-600"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="m21 21-4-4"/></svg></button></div></form>
+      <div class="flex items-center gap-2 md:gap-3 shrink-0">
+        <button onclick="toggleSearch()" class="md:hidden flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium text-sm pl-3.5 pr-4 py-2 rounded-full" aria-label="Search"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="m21 21-4-4"/></svg><span>খুঁজুন</span></button>
+        <button onclick="openWallet()" class="hidden md:flex p-2 rounded-lg hover:bg-gray-100 text-gray-700 flex-col items-center"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v0H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2V9"/><circle cx="16" cy="12" r="1.3" fill="currentColor"/></svg><span class="text-[10px] font-semibold text-osco-green">ওয়ালেট</span></button>
+        <button onclick="openLogin()" class="hidden md:flex p-2 rounded-lg hover:bg-gray-100 text-gray-700 flex-col items-center"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><span class="text-[10px] font-semibold text-gray-600">লগইন</span></button>
+        <button onclick="openCart()" class="hidden md:flex relative items-center gap-1.5 bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900 font-bold px-4 py-2.5 rounded-lg shadow-sm shrink-0"><span class="relative"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13 5.4 5M7 13l-2 4h12"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg><span class="absolute -top-2 -right-2 bg-osco-red text-white text-[10px] font-bold min-w-[18px] h-[18px] px-1 rounded-full grid place-items-center">২</span></span><span class="text-sm">৳৩৬০</span></button>
+      </div>
+    </div>
+    <div id="msearch" class="md:hidden"><form onsubmit="return doSearch(event)" class="pb-2"><div class="flex items-center bg-gray-100 rounded-full overflow-hidden border border-gray-200 focus-within:border-osco-green"><input name="q" type="search" placeholder="পণ্য খুঁজুন..." class="flex-1 bg-transparent px-4 py-2 text-sm outline-none min-w-0"><button class="px-4 py-2 text-gray-600"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="m21 21-4-4"/></svg></button></div></form></div>
+  </div>
+  <!-- ===== DESKTOP DROPDOWN MENU BAR (oscobrand style, শুধু md+) ===== -->
+  <nav class="hidden md:block border-t border-gray-100 bg-white">
+    <div class="max-w-6xl mx-auto px-4 flex items-center gap-1">
+      <div class="menu-item group relative">
+        <a href="category.html?cat=rice" class="flex items-center gap-1 px-3 py-2.5 text-[14px] font-semibold text-osco-green hover:text-osco-green-dark">ন্যাচারাল চাল <svg class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="m6 9 6 6 6-6"/></svg></a>
+        <div class="menu-panel absolute left-0 top-full bg-white shadow-xl rounded-b-xl border border-gray-100 border-t-0 p-4 w-[560px] grid grid-cols-3 gap-x-6 gap-y-1.5 z-50">
+          <a href="product.html?id=p4" class="text-[13px] text-gray-700 hover:text-osco-green py-1">চিনিগুড়া চাল</a>
+          <a href="product.html?id=p5" class="text-[13px] text-gray-700 hover:text-osco-green py-1">স্ট্যান্ডার্ড নাজিরশাইল</a>
+          <a href="product.html?id=p1" class="text-[13px] text-gray-700 hover:text-osco-green py-1">ব্ল্যাক রাইস (কালো চাল)</a>
+          <a href="product.html?id=p2" class="text-[13px] text-gray-700 hover:text-osco-green py-1">ব্রাউন রাইস ফুল ফাইবার</a>
+          <a href="product.html?id=p3" class="text-[13px] text-gray-700 hover:text-osco-green py-1">ব্রাউন রাইস হাফ ফাইবার</a>
+          <a href="product.html?id=p16" class="text-[13px] text-gray-700 hover:text-osco-green py-1">রেড নাজিরশাইল (লাল চাল)</a>
+          <a href="category.html?cat=rice" class="text-[13px] font-semibold text-osco-green py-1">সব চাল দেখুন →</a>
+        </div>
+      </div>
+      <div class="menu-item group relative">
+        <a href="category.html?cat=daily" class="flex items-center gap-1 px-3 py-2.5 text-[14px] font-semibold text-gray-700 hover:text-osco-green">স্বাস্থ্যকর নিত্যপণ্য <svg class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="m6 9 6 6 6-6"/></svg></a>
+        <div class="menu-panel absolute left-0 top-full bg-white shadow-xl rounded-b-xl border border-gray-100 border-t-0 p-4 w-[520px] grid grid-cols-3 gap-x-6 gap-y-1.5 z-50">
+          <a href="product.html?id=p10" class="text-[13px] text-gray-700 hover:text-osco-green py-1">খাঁটি সরিষার তেল</a>
+          <a href="product.html?id=p11" class="text-[13px] text-gray-700 hover:text-osco-green py-1">খাঁটি ঘি</a>
+          <a href="product.html?id=p18" class="text-[13px] text-gray-700 hover:text-osco-green py-1">প্রিমিয়াম আটা</a>
+          <a href="product.html?id=p12" class="text-[13px] text-gray-700 hover:text-osco-green py-1">প্রাকৃতিক মধু</a>
+          <a href="product.html?id=p13" class="text-[13px] text-gray-700 hover:text-osco-green py-1">দেশি মসুর ডাল</a>
+          <a href="product.html?id=p19" class="text-[13px] text-gray-700 hover:text-osco-green py-1">সয়াবিন তেল</a>
+          <a href="category.html?cat=daily" class="text-[13px] font-semibold text-osco-green py-1">সব দেখুন →</a>
+        </div>
+      </div>
+      <div class="menu-item group relative">
+        <a href="category.html?cat=combo" class="flex items-center gap-1 px-3 py-2.5 text-[14px] font-semibold text-gray-700 hover:text-osco-green">অফার সমূহ <svg class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="m6 9 6 6 6-6"/></svg></a>
+        <div class="menu-panel absolute left-0 top-full bg-white shadow-xl rounded-b-xl border border-gray-100 border-t-0 p-4 w-64 grid grid-cols-1 gap-y-1.5 z-50">
+          <a href="product.html?id=p6" class="text-[13px] text-gray-700 hover:text-osco-green py-1">হেলদি কম্বো প্যাকেজ</a>
+          <a href="product.html?id=p9" class="text-[13px] text-gray-700 hover:text-osco-green py-1">মাসিক বাজার কম্বো বক্স</a>
+          <a href="product.html?id=p20" class="text-[13px] text-gray-700 hover:text-osco-green py-1">স্পেশাল গিফট প্যাক</a>
+          <a href="category.html?cat=combo" class="text-[13px] font-semibold text-osco-green py-1">সব অফার দেখুন →</a>
+        </div>
+      </div>
+      <div class="menu-item group relative">
+        <a href="category.html?cat=rice" class="flex items-center gap-1 px-3 py-2.5 text-[14px] font-semibold text-gray-700 hover:text-osco-green">জারিফ ব্র্যান্ড <svg class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="m6 9 6 6 6-6"/></svg></a>
+        <div class="menu-panel absolute left-0 top-full bg-white shadow-xl rounded-b-xl border border-gray-100 border-t-0 p-4 w-56 grid grid-cols-1 gap-y-1.5 z-50">
+          <a href="product.html?id=p5" class="text-[13px] text-gray-700 hover:text-osco-green py-1">জারিফ স্ট্যান্ডার্ড নাজির</a>
+          <a href="product.html?id=p4" class="text-[13px] text-gray-700 hover:text-osco-green py-1">কাটারি নাজির</a>
+          <a href="product.html?id=p2" class="text-[13px] text-gray-700 hover:text-osco-green py-1">জিরাশাইল</a>
+        </div>
+      </div>
+      <a href="category.html" class="px-3 py-2.5 text-[14px] font-semibold text-gray-500 hover:text-osco-green">More</a>
+    </div>
+  </nav>
+</header>
+
+<main class="max-w-6xl mx-auto px-3 md:px-4">
+  <nav class="text-[12px] text-gray-400 mt-3"><a href="index.html" class="hover:text-osco-green">হোম</a> / <a href="category.html?cat=rice" class="hover:text-osco-green">চাল</a> / <span class="text-gray-600">প্রিমিয়াম চিনিগুড়া চাল</span></nav>
+
+  <div class="grid md:grid-cols-2 gap-6 mt-3">
+    <!-- GALLERY (Falaq food style: main + thumbs) — প্রথমে ভিডিও -->
+    <div>
+      <div id="mainmedia" class="bg-white rounded-2xl border border-gray-100 aspect-square grid place-items-center overflow-hidden relative">
+        <!-- ডিফল্ট: ভিডিও থাম্বনেইল (ক্লিকে এখানেই play হয়) -->
+        <div onclick="playGalleryVideo('8cxNeMmti9Y')" class="absolute inset-0 cursor-pointer group bg-black">
+          <img src="https://img.youtube.com/vi/8cxNeMmti9Y/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <span class="absolute inset-0 bg-black/25 grid place-items-center"><span class="w-16 h-16 rounded-full bg-white/90 grid place-items-center shadow-lg group-hover:scale-110 transition"><svg width="28" height="28" fill="currentColor" class="text-osco-red ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </div>
+      </div>
+      <div class="flex gap-2 mt-3 overflow-x-auto no-scrollbar">
+        <!-- ভিডিও থাম্ব (প্রথমে, সিলেক্টেড) -->
+        <button onclick="showGalleryVideo(this)" class="thumb shrink-0 w-16 h-16 rounded-xl border-2 border-osco-green bg-black p-0 overflow-hidden relative">
+          <img src="https://img.youtube.com/vi/8cxNeMmti9Y/hqdefault.jpg" class="w-full h-full object-cover">
+          <span class="absolute inset-0 grid place-items-center"><svg width="18" height="18" fill="currentColor" class="text-white drop-shadow" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+        <button onclick="setImg('./img/product4.webp',this)" class="thumb shrink-0 w-16 h-16 rounded-xl border-2 border-gray-200 bg-white p-1 overflow-hidden"><img src="./img/product4.webp" class="w-full h-full object-contain"></button>
+        <button onclick="setImg('./img/product1.webp',this)" class="thumb shrink-0 w-16 h-16 rounded-xl border-2 border-gray-200 bg-white p-1 overflow-hidden"><img src="./img/product1.webp" class="w-full h-full object-contain"></button>
+        <button onclick="setImg('./img/product5.webp',this)" class="thumb shrink-0 w-16 h-16 rounded-xl border-2 border-gray-200 bg-white p-1 overflow-hidden"><img src="./img/product5.webp" class="w-full h-full object-contain"></button>
+        <button onclick="setImg('./img/product2.webp',this)" class="thumb shrink-0 w-16 h-16 rounded-xl border-2 border-gray-200 bg-white p-1 overflow-hidden"><img src="./img/product2.webp" class="w-full h-full object-contain"></button>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div>
+      <span class="inline-block bg-green-50 text-osco-green text-xs font-bold px-2 py-1 rounded-full border border-osco-green/20">Premium</span>
+      <h1 class="text-2xl font-extrabold mt-2 leading-snug">প্রিমিয়াম চিনিগুড়া চাল</h1>
+      <div class="flex items-center gap-2 mt-2 text-sm text-gray-500"><span class="text-osco-yellow">★★★★★</span>৪.৯ • ২১০০+ বিক্রি হয়েছে</div>
+      <div class="mt-4"><span class="text-osco-green font-extrabold text-3xl">৳১৪৫</span><span class="line-through text-gray-400 text-lg ml-2">৳১৮০</span><span class="ml-2 bg-osco-red text-white text-xs font-bold px-2 py-1 rounded-full">-১৯%</span></div>
+
+      <!-- WEIGHT OPTIONS (khaasfood style pills) — এক লাইনে থাকে, বেশি হলে পাশে স্ক্রল হয় -->
+      <div class="mt-5">
+        <p class="text-sm font-bold mb-2">ওজন নির্বাচন করুন</p>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-1 px-1">
+          <button onclick="pickWeight(this,'৳১৪৫')" class="wbtn shrink-0 px-4 py-2 rounded-xl border-2 border-osco-green bg-green-50 text-osco-green text-sm font-semibold text-center"><div>১ কেজি</div><div class="text-[12px]">৳১৪৫</div></button>
+          <button onclick="pickWeight(this,'৳৭০০')" class="wbtn shrink-0 px-4 py-2 rounded-xl border-2 border-gray-200 bg-white text-gray-600 text-sm font-semibold text-center"><div>৫ কেজি</div><div class="text-[12px] text-gray-400">৳৭০০</div></button>
+          <button onclick="pickWeight(this,'৳৩৪০০')" class="wbtn shrink-0 px-4 py-2 rounded-xl border-2 border-gray-200 bg-white text-gray-600 text-sm font-semibold text-center"><div>২৫ কেজি</div><div class="text-[12px] text-gray-400">৳৩৪০০</div></button>
+          <button onclick="pickWeight(this,'৳৬৬০০')" class="wbtn shrink-0 px-4 py-2 rounded-xl border-2 border-gray-200 bg-white text-gray-600 text-sm font-semibold text-center"><div>৫০ কেজি</div><div class="text-[12px] text-gray-400">৳৬৬০০</div></button>
+        </div>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div id="mainbtns" class="mt-6 grid grid-cols-2 gap-3">
+        <button class="w-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900 font-bold text-sm py-3.5 rounded-full flex items-center justify-center gap-1.5"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>কার্টে যোগ করুন</button>
+        <a href="checkout.html" class="w-full py-3.5 rounded-full bg-osco-green hover:bg-osco-green-dark text-white font-extrabold flex items-center justify-center">এখনই কিনুন</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMER REVIEW SCREENSHOT GALLERY (auto-slide, facebook review style) -->
+  <section class="mt-8">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="w-1.5 h-6 rounded bg-osco-yellow"></span>
+      <h2 class="font-bold text-xl">Customer Review</h2>
+    </div>
+    <div id="rev-carousel" class="relative">
+      <!-- scrolling gallery of review screenshots (আলাদা আলাদা প্রস্থের ছবি পাশাপাশি) -->
+      <div id="rev-track" class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth pb-1 px-1">
+        <img src="./img/product1.webp" alt="রিভিউ" class="rev-shot shrink-0 h-64 md:h-80 w-auto rounded-xl border border-gray-200 shadow-sm bg-white object-contain">
+        <img src="./img/product2.webp" alt="রিভিউ" class="rev-shot shrink-0 h-64 md:h-80 w-auto rounded-xl border border-gray-200 shadow-sm bg-white object-contain">
+        <img src="./img/product3.webp" alt="রিভিউ" class="rev-shot shrink-0 h-64 md:h-80 w-auto rounded-xl border border-gray-200 shadow-sm bg-white object-contain">
+        <img src="./img/product4.webp" alt="রিভিউ" class="rev-shot shrink-0 h-64 md:h-80 w-auto rounded-xl border border-gray-200 shadow-sm bg-white object-contain">
+        <img src="./img/product5.webp" alt="রিভিউ" class="rev-shot shrink-0 h-64 md:h-80 w-auto rounded-xl border border-gray-200 shadow-sm bg-white object-contain">
+      </div>
+      <!-- সবুজ গোল অ্যারো (দুই পাশে) -->
+      <button onclick="revGo(-1)" class="absolute left-1 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-osco-green hover:bg-osco-green-dark text-white shadow-lg" aria-label="আগের"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
+      <button onclick="revGo(1)" class="absolute right-1 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-osco-green hover:bg-osco-green-dark text-white shadow-lg" aria-label="পরের"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+    <div class="text-center mt-5">
+      <a href="#" class="inline-block px-6 py-2.5 rounded-full bg-osco-blue hover:bg-osco-blue-dark text-white font-semibold text-sm shadow-sm">See more reviews</a>
+    </div>
+  </section>
+
+  <!-- DETAILS (content sequence oscobrand style) -->
+  <section class="mt-8">
+    <div class="border-b border-gray-200 flex gap-4 text-sm font-bold">
+      <span class="py-2 border-b-2 border-osco-green text-osco-green">বিবরণ</span>
+    </div>
+    <div class="py-4 text-[14px] leading-relaxed text-gray-700">
+      <p class="mb-2">OSCO Brand এর এই পণ্যটি ১০০% কেমিক্যাল মুক্ত ও প্রাকৃতিক উপায়ে প্রক্রিয়াজাত। রোদে শুকানো চাতালের ন্যাচারাল প্রসেসে তৈরি — স্বাদ ও পুষ্টিগুণে ভরপুর।</p>
+      <ul class="list-disc pl-5 space-y-1 text-gray-600"><li>১০০% কেমিক্যাল মুক্ত ও ন্যাচারাল</li><li>রোদে শুকানো, প্রাকৃতিক প্রসেসিং</li><li>পরিবারের জন্য নিরাপদ ও স্বাস্থ্যকর</li><li>প্রিমিয়াম কোয়ালিটি প্যাকেজিং</li></ul>
+      <p class="mt-3 text-[13px] text-gray-500">Factory: Godown Road, Bonarpara, Saghata, Gaibandha</p>
+    </div>
+  </section>
+
+  <!-- RELATED -->
+  <section class="mt-8">
+    <div class="flex items-center gap-2 mb-3"><span class="w-1.5 h-6 rounded bg-osco-red"></span><h2 class="font-bold text-xl">সম্পর্কিত পণ্য</h2></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col"><a href="product.html" class="relative block overflow-hidden bg-gray-50 aspect-square"><img src="./img/product1.webp" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"></a><div class="p-2.5 flex flex-col flex-1"><a href="product.html" class="text-[13px] font-semibold text-gray-800 clamp-2 min-h-[36px] leading-tight">ব্ল্যাক রাইস</a><div class="mt-2"><span class="text-osco-green font-extrabold text-base">৳১৮০</span></div><button class="mt-2 w-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900 font-bold text-sm py-2 rounded-full">কার্টে যোগ করুন</button></div></div>
+      <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col"><a href="product.html" class="relative block overflow-hidden bg-gray-50 aspect-square"><img src="./img/product2.webp" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"></a><div class="p-2.5 flex flex-col flex-1"><a href="product.html" class="text-[13px] font-semibold text-gray-800 clamp-2 min-h-[36px] leading-tight">ব্রাউন রাইস ফুল ফাইবার</a><div class="mt-2"><span class="text-osco-green font-extrabold text-base">৳১২০</span></div><button class="mt-2 w-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900 font-bold text-sm py-2 rounded-full">কার্টে যোগ করুন</button></div></div>
+      <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col"><a href="product.html" class="relative block overflow-hidden bg-gray-50 aspect-square"><img src="./img/product3.webp" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"></a><div class="p-2.5 flex flex-col flex-1"><a href="product.html" class="text-[13px] font-semibold text-gray-800 clamp-2 min-h-[36px] leading-tight">ব্রাউন রাইস হাফ ফাইবার</a><div class="mt-2"><span class="text-osco-green font-extrabold text-base">৳১১০</span></div><button class="mt-2 w-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900 font-bold text-sm py-2 rounded-full">কার্টে যোগ করুন</button></div></div>
+      <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col"><a href="product.html" class="relative block overflow-hidden bg-gray-50 aspect-square"><img src="./img/product5.webp" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-500"></a><div class="p-2.5 flex flex-col flex-1"><a href="product.html" class="text-[13px] font-semibold text-gray-800 clamp-2 min-h-[36px] leading-tight">নাজিরশাইল চাল ২৫ কেজি</a><div class="mt-2"><span class="text-osco-green font-extrabold text-base">৳১৭৫০</span></div><button class="mt-2 w-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900 font-bold text-sm py-2 rounded-full">কার্টে যোগ করুন</button></div></div>
+    </div>
+  </section>
+  <div class="h-24 md:h-8"></div>
+</main>
+
+<!-- STICKY BUY BAR (appears after scroll past main buttons) -->
+<div id="sticky" class="fixed bottom-0 inset-x-0 z-30 bg-white border-t shadow-[0_-4px_16px_rgba(0,0,0,.1)] translate-y-full transition-transform duration-300 border-t-gray-200">
+  <div class="max-w-6xl mx-auto px-3 py-2.5 flex items-center gap-2">
+    <div class="hidden sm:block mr-1"><p class="text-[13px] font-bold clamp-2 leading-tight max-w-[180px]">প্রিমিয়াম চিনিগুড়া চাল</p><p class="text-osco-green font-extrabold">৳১৪৫</p></div>
+    <button onclick="openCart()" class="flex-1 py-3 rounded-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900 font-extrabold">কার্টে যোগ করুন</button>
+    <a href="checkout.html" class="flex-1 py-3 rounded-full bg-osco-green hover:bg-osco-green-dark text-white font-extrabold flex items-center justify-center">এখনই কিনুন</a>
+  </div>
+</div>
+
+<!-- shared drawers/popups (same as other pages) -->
+<aside id="sidemenu" class="drawer fixed top-0 left-0 h-full w-[84%] max-w-xs bg-white z-50 -translate-x-full flex flex-col">
+  <div class="p-4 bg-osco-green text-white flex items-center justify-between"><img src="./img/logo.webp" class="h-9 bg-white rounded-lg p-1"><button onclick="closeAll()" class="p-1"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <nav class="flex-1 overflow-y-auto py-2">
+    <p class="px-4 pt-1 pb-2 text-[12px] font-bold text-gray-400 uppercase tracking-wide">ক্যাটাগরি</p>
+    <div class="sub-wrap border-b border-gray-50">
+      <button onclick="toggleSub(this)" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50"><span class="w-9 h-9 rounded-xl grid place-items-center text-lg bg-gray-100">🌾</span><span class="text-[14px] font-medium text-gray-700">চাল</span><svg class="sub-chev ml-auto text-gray-400" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="m9 6 6 6-6 6"/></svg></button>
+      <div class="submenu bg-gray-50/60">
+        <a href="product.html?id=p4" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">চিনিগুড়া চাল</a>
+        <a href="product.html?id=p5" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">নাজিরশাইল চাল</a>
+        <a href="product.html?id=p1" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">ব্ল্যাক রাইস</a>
+        <a href="product.html?id=p2" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">ব্রাউন রাইস</a>
+        <a href="category.html?cat=rice" class="block pl-16 pr-4 py-2 text-[13px] font-semibold text-osco-green">সব চাল দেখুন →</a>
+      </div>
+    </div>
+    <div class="sub-wrap border-b border-gray-50">
+      <button onclick="toggleSub(this)" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50"><span class="w-9 h-9 rounded-xl grid place-items-center text-lg bg-gray-100">🎁</span><span class="text-[14px] font-medium text-gray-700">কম্বো অফার</span><svg class="sub-chev ml-auto text-gray-400" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="m9 6 6 6-6 6"/></svg></button>
+      <div class="submenu bg-gray-50/60">
+        <a href="product.html?id=p6" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">হেলদি কম্বো প্যাকেজ</a>
+        <a href="product.html?id=p9" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">মাসিক বাজার বক্স</a>
+        <a href="product.html?id=p20" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">স্পেশাল গিফট প্যাক</a>
+        <a href="category.html?cat=combo" class="block pl-16 pr-4 py-2 text-[13px] font-semibold text-osco-green">সব অফার দেখুন →</a>
+      </div>
+    </div>
+    <div class="sub-wrap border-b border-gray-50">
+      <button onclick="toggleSub(this)" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50"><span class="w-9 h-9 rounded-xl grid place-items-center text-lg bg-gray-100">🛒</span><span class="text-[14px] font-medium text-gray-700">নিত্যপণ্য</span><svg class="sub-chev ml-auto text-gray-400" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="m9 6 6 6-6 6"/></svg></button>
+      <div class="submenu bg-gray-50/60">
+        <a href="product.html?id=p11" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">খাঁটি ঘি</a>
+        <a href="product.html?id=p10" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">সরিষার তেল</a>
+        <a href="product.html?id=p18" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">প্রিমিয়াম আটা</a>
+        <a href="product.html?id=p12" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">প্রাকৃতিক মধু</a>
+        <a href="category.html?cat=daily" class="block pl-16 pr-4 py-2 text-[13px] font-semibold text-osco-green">সব দেখুন →</a>
+      </div>
+    </div>
+    <div class="sub-wrap border-b border-gray-50">
+      <button onclick="toggleSub(this)" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50"><span class="w-9 h-9 rounded-xl grid place-items-center text-lg bg-gray-100">🍯</span><span class="text-[14px] font-medium text-gray-700">মধু</span><svg class="sub-chev ml-auto text-gray-400" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="m9 6 6 6-6 6"/></svg></button>
+      <div class="submenu bg-gray-50/60">
+        <a href="product.html?id=p12" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">প্রাকৃতিক খাঁটি মধু</a>
+        <a href="product.html?id=p17" class="block pl-16 pr-4 py-2 text-[13px] text-gray-600 hover:text-osco-green">কালোজিরা ফুল মধু</a>
+        <a href="category.html?cat=honey" class="block pl-16 pr-4 py-2 text-[13px] font-semibold text-osco-green">সব মধু দেখুন →</a>
+      </div>
+    </div>
+    <div class="my-2 border-t-4 border-osco-yellow/40 mx-4 rounded"></div>
+    <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"><span class="text-lg w-7 text-center">🏠</span><span class="text-[14px] text-gray-600">হোম</span></a>
+    <button onclick="openWallet()" class="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"><span class="text-lg w-7 text-center">💳</span><span class="text-[14px] text-gray-600">ওয়ালেট</span></button>
+    <button onclick="openContact()" class="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"><span class="text-lg w-7 text-center">📞</span><span class="text-[14px] text-gray-600">যোগাযোগ</span></button>
+  </nav>
+</aside>
+<aside id="wallet" class="drawer fixed top-0 right-0 h-full w-[88%] max-w-sm bg-gray-50 z-50 translate-x-full flex flex-col"><div class="p-4 bg-osco-blue text-white flex items-center justify-between"><h3 class="font-bold text-lg">💳 আমার ওয়ালেট</h3><button onclick="closeAll()" class="p-1"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="p-4"><div class="rounded-2xl p-5 text-white shadow-lg" style="background:linear-gradient(120deg,#1560bd,#16a34a)"><p class="text-sm opacity-90">বর্তমান ব্যালেন্স</p><p class="text-3xl font-extrabold mt-1">৳২৫০</p></div></div><div class="px-4 pb-1 text-sm font-bold text-gray-600">ট্রানজেকশন হিস্টোরি</div><div class="flex-1 overflow-y-auto px-4 pb-4 space-y-2"><div class="flex items-center justify-between bg-white rounded-xl p-3 shadow-sm"><div><p class="text-[13px] font-semibold text-gray-800">সাইন-আপ বোনাস</p><p class="text-[11px] text-gray-400">2026-07-01</p></div><span class="font-bold text-osco-green">+৳২৫০</span></div></div></aside>
+<aside id="cart" class="drawer fixed top-0 right-0 h-full w-full max-w-md bg-gray-50 z-50 translate-x-full flex flex-col">
+  <div class="p-3 bg-white border-b flex items-center justify-between shadow-sm border-b-gray-200"><h3 class="font-bold text-lg flex items-center gap-2">🛒 আপনার কার্ট <span class="text-xs bg-osco-red text-white px-2 py-0.5 rounded-full">২</span></h3><button onclick="closeAll()" class="p-1"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <!-- progress + gift -->
+  <div class="bg-white px-3 py-3 border-b border-b-gray-200">
+    <div class="text-[12.5px] text-gray-700 leading-snug">আপনি আজকে <b class="text-osco-green-dark">৳৮০</b> ডিস্কাউন্ট পেয়েছেন, আর মাত্র <b class="text-osco-red">৳১৬৪০</b> অর্ডার করলেই <b>৳১৫০</b> স্পেশাল বোনাস পাবেন — মোট <b>৳২৩০</b> ছাড়ে অর্ডার কনফার্ম করতে পারবেন।</div>
+    <div class="mt-2 h-2.5 rounded-full bg-gray-200 overflow-hidden"><div class="progress-fill h-full rounded-full" style="width:18%"></div></div>
+    <div class="mt-2 flex items-center justify-between text-[12px]"><span class="flex items-center gap-1 text-gray-400">🎁 গিফট (৳১০০০+ এ ফ্রি)</span><span class="font-bold text-osco-green-dark">You saved ৳৮০</span></div>
+  </div>
+  <!-- lines + suggestions -->
+  <div class="flex-1 overflow-y-auto">
+    <div class="p-3">
+      <!-- cart line -->
+      <div class="flex gap-3 p-3 bg-white rounded-xl border border-gray-100 mb-2">
+        <a href="product.html"><img src="./img/product4.webp" class="w-16 h-16 object-contain rounded-lg bg-gray-50"></a>
+        <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold text-gray-800 leading-tight clamp-2">প্রিমিয়াম চিনিগুড়া চাল</p><p class="text-[11px] text-gray-500 mt-0.5">১ কেজি</p>
+          <div class="flex items-center justify-between mt-1.5"><div class="flex items-center border border-gray-200 rounded-lg"><button class="w-7 h-7 grid place-items-center text-gray-600 font-bold">−</button><span class="w-7 text-center text-sm font-bold">১</span><button class="w-7 h-7 grid place-items-center text-osco-green font-bold">+</button></div><div class="text-right"><span class="text-osco-green font-extrabold text-sm">৳১৪৫</span><span class="line-through text-gray-400 text-[11px] ml-1">৳১৮০</span></div></div>
+        </div>
+        <button onclick="openRemove()" class="self-start text-gray-300 hover:text-osco-red p-1"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="flex gap-3 p-3 bg-white rounded-xl border border-gray-100 mb-2">
+        <a href="product.html"><img src="./img/product1.webp" class="w-16 h-16 object-contain rounded-lg bg-gray-50"></a>
+        <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold text-gray-800 leading-tight clamp-2">ব্ল্যাক রাইস (Black Rice)</p><p class="text-[11px] text-gray-500 mt-0.5">৫০০ গ্রাম</p>
+          <div class="flex items-center justify-between mt-1.5"><div class="flex items-center border border-gray-200 rounded-lg"><button class="w-7 h-7 grid place-items-center text-gray-600 font-bold">−</button><span class="w-7 text-center text-sm font-bold">১</span><button class="w-7 h-7 grid place-items-center text-osco-green font-bold">+</button></div><div class="text-right"><span class="text-osco-green font-extrabold text-sm">৳১৮০</span><span class="line-through text-gray-400 text-[11px] ml-1">৳২২০</span></div></div>
+        </div>
+        <button onclick="openRemove()" class="self-start text-gray-300 hover:text-osco-red p-1"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <a href="index.html" class="block text-center py-2 text-osco-green font-bold text-sm border border-osco-green/30 rounded-xl mt-1">＋ শপিং চালিয়ে যান</a>
+    </div>
+    <!-- suggestions (flipkart style) -->
+    <div class="bg-gray-50 pb-4 border-t mt-1 border-t-gray-200">
+      <div class="osco-slider">
+        <div class="flex items-center justify-between px-3 mt-3 mb-2">
+          <p class="text-[13px] font-bold text-gray-700">🔥 অফারে থাকা পণ্য</p>
+          <div class="flex items-center gap-1.5">
+            <button onclick="oscoSlide(this,-1)" class="w-7 h-7 grid place-items-center rounded-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900" aria-label="আগের"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
+            <button onclick="oscoSlide(this,1)" class="w-7 h-7 grid place-items-center rounded-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900" aria-label="পরের"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+        </div>
+        <div class="slider-track flex gap-2 overflow-x-auto no-scrollbar scroll-smooth px-3 pb-1">
+          <a href="product.html" class="shrink-0 w-28 bg-white border border-gray-100 rounded-xl p-2 shadow-sm"><img src="./img/product2.webp" class="w-full h-20 object-contain"><p class="text-[11px] font-semibold clamp-2 mt-1 leading-tight">ফ্যামিলি সেভার কম্বো</p><p class="text-osco-green font-bold text-[12px] mt-0.5">৳১২৫০</p></a>
+          <a href="product.html" class="shrink-0 w-28 bg-white border border-gray-100 rounded-xl p-2 shadow-sm"><img src="./img/product3.webp" class="w-full h-20 object-contain"><p class="text-[11px] font-semibold clamp-2 mt-1 leading-tight">হেলদি ব্রেকফাস্ট কম্বো</p><p class="text-osco-green font-bold text-[12px] mt-0.5">৳৭৮০</p></a>
+          <a href="product.html" class="shrink-0 w-28 bg-white border border-gray-100 rounded-xl p-2 shadow-sm"><img src="./img/product1.webp" class="w-full h-20 object-contain"><p class="text-[11px] font-semibold clamp-2 mt-1 leading-tight">OSCO কম্বো ৩ পদ</p><p class="text-osco-green font-bold text-[12px] mt-0.5">৳৯৯০</p></a>
+        </div>
+      </div>
+      <div class="osco-slider">
+        <div class="flex items-center justify-between px-3 mt-3 mb-2">
+          <p class="text-[13px] font-bold text-gray-700">👁️ সম্প্রতি দেখা পণ্য</p>
+          <div class="flex items-center gap-1.5">
+            <button onclick="oscoSlide(this,-1)" class="w-7 h-7 grid place-items-center rounded-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900" aria-label="আগের"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
+            <button onclick="oscoSlide(this,1)" class="w-7 h-7 grid place-items-center rounded-full bg-osco-yellow hover:bg-osco-yellow-dark text-gray-900" aria-label="পরের"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+        </div>
+        <div class="slider-track flex gap-2 overflow-x-auto no-scrollbar scroll-smooth px-3 pb-1">
+          <a href="product.html" class="shrink-0 w-28 bg-white border border-gray-100 rounded-xl p-2 shadow-sm"><img src="./img/product5.webp" class="w-full h-20 object-contain"><p class="text-[11px] font-semibold clamp-2 mt-1 leading-tight">নাজিরশাইল চাল</p><p class="text-osco-green font-bold text-[12px] mt-0.5">৳১৭৫০</p></a>
+          <a href="product.html" class="shrink-0 w-28 bg-white border border-gray-100 rounded-xl p-2 shadow-sm"><img src="./img/product2.webp" class="w-full h-20 object-contain"><p class="text-[11px] font-semibold clamp-2 mt-1 leading-tight">প্রাকৃতিক মধু</p><p class="text-osco-green font-bold text-[12px] mt-0.5">৳৩৫০</p></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- footer: coupon + totals + checkout (sticky) -->
+  <div class="bg-white border-t shadow-[0_-4px_16px_rgba(0,0,0,.06)] border-t-gray-200">
+    <div class="coupon-wrap border-b border-b-gray-200">
+      <button onclick="toggleCoupon(this)" class="w-full flex items-center gap-2 px-3 py-2.5 text-sm font-bold text-gray-800"><span class="text-osco-blue">🎟️</span>স্পেশাল কোড / কুপন দিন<svg class="cpn-chev ml-auto text-gray-400" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="m6 9 6 6 6-6"/></svg></button>
+      <div class="coupon-body"><div class="px-3 pb-3 flex gap-2"><input placeholder="কুপন কোড (OSCO10 / FLAT100)" class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-osco-green"><button class="px-4 rounded-lg bg-osco-blue text-white font-bold text-sm">অ্যাপ্লাই</button></div></div>
+    </div>
+    <div class="p-3 space-y-1 text-sm">
+      <div class="flex justify-between text-gray-600"><span>সাবটোটাল</span><span>৳৩২৫</span></div>
+      <div class="flex justify-between text-gray-600"><span>প্রোডাক্ট ছাড়</span><span class="text-osco-green">−৳৮০</span></div>
+      <div class="flex justify-between text-gray-600"><span>ডেলিভারি</span><span>৳৬০</span></div>
+      <div class="flex justify-between font-extrabold text-base pt-1 border-t mt-1 border-t-gray-200"><span>সর্বমোট</span><span class="text-osco-green-dark">৳৩৮৫</span></div>
+      <div class="text-center text-[12px] font-bold text-osco-green bg-green-50 rounded-lg py-1 mt-1">🎉 আপনি সাশ্রয় করছেন ৳৮০</div>
+    </div>
+    <div class="p-3 pt-0 flex gap-2"><a href="cart.html" class="flex-1 text-center py-3 rounded-xl font-bold text-osco-green border border-osco-green/40 bg-white">কার্ট দেখুন</a><a href="checkout.html" class="flex-1 text-center py-3 rounded-full font-extrabold text-white text-base bg-osco-green hover:bg-osco-green-dark shadow">চেকআউট • ৳৩৮৫</a></div>
+  </div>
+</aside>
+<button onclick="openCart()" class="fixed right-0 top-1/2 -translate-y-1/2 z-30 rounded-l-xl shadow-lg overflow-hidden flex flex-col items-stretch text-center"><span class="bg-osco-green text-white px-3 pt-2.5 pb-2 flex flex-col items-center gap-1"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13 5.4 5M7 13l-2 4h12"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg><span class="text-[11px] font-bold leading-none">২ Items</span></span><span class="bg-white text-osco-green-dark text-[12px] font-extrabold py-1.5 px-2">৳৩৬০</span></button>
+
+<!-- BOTTOM NAV -->
+<nav id="bottomnav" class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,.06)] transition-transform duration-300"><div class="grid grid-cols-5 h-[56px]">
+  <a href="index.html" class="flex flex-col items-center justify-center gap-0.5 text-gray-500"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linejoin="round" d="M3 11l9-7 9 7M5 10v10h14V10"/></svg><span class="text-[10px] font-medium">হোম</span></a>
+  <button onclick="openMenu()" class="flex flex-col items-center justify-center gap-0.5 text-gray-500"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg><span class="text-[10px] font-medium">মেনু</span></button>
+  <a href="category.html?cat=combo" class="relative flex flex-col items-center justify-center gap-0.5 text-gray-500"><span class="relative"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 7v13"/></svg><span class="absolute -top-1.5 -right-2 bg-osco-red text-white text-[9px] font-bold px-1 rounded-full z-10">৩</span><span class="absolute -top-1.5 -right-2 w-4 h-4 bg-osco-red rounded-full ping-dot"></span></span><span class="text-[10px] font-medium">অফার</span></a>
+  <button onclick="focusSearch()" class="flex flex-col items-center justify-center gap-0.5 text-gray-500"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="m21 21-4-4"/></svg><span class="text-[10px] font-medium">সার্চ</span></button>
+  <button onclick="openContact()" class="flex flex-col items-center justify-center gap-0.5 text-gray-500"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="text-[10px] font-medium">যোগাযোগ</span></button>
+</div></nav>
+
+<!-- CONTACT / LOGIN popups -->
+<div id="contact" class="fixed inset-0 z-50 hidden items-end md:items-center justify-center"><div class="absolute inset-0 bg-black/50" onclick="closeContact()"></div><div class="relative w-full md:w-96 bg-white rounded-t-3xl md:rounded-3xl p-5 pop-in mb-[56px] md:mb-0"><div class="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-4 md:hidden"></div><h3 class="font-bold text-lg mb-4 text-center">যোগাযোগ করুন</h3><div class="grid grid-cols-2 gap-3"><a href="https://wa.me/8801700000000" class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-green-50 text-green-700 font-semibold"><span class="text-3xl">💬</span>WhatsApp</a><a href="tel:+8801700000000" class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-blue-50 text-blue-700 font-semibold"><span class="text-3xl">📞</span>কল করুন</a><a href="https://m.me/oscobrand" class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-indigo-50 text-indigo-700 font-semibold"><span class="text-3xl">📨</span>Messenger</a><button onclick="openLogin()" class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-yellow-50 text-yellow-700 font-semibold"><span class="text-3xl">👤</span>লগইন</button><a href="#" class="col-span-2 flex items-center justify-center gap-2 p-3 rounded-2xl bg-red-50 text-red-700 font-semibold"><span class="text-2xl">📝</span>অভিযোগ করুন</a></div></div></div>
+<div id="removepop" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/60" onclick="closeRemove()"></div>
+  <div class="relative w-full max-w-xs bg-white rounded-3xl p-6 pop-in text-center">
+    <div class="text-4xl mb-2">🗑️</div><h3 class="font-bold text-lg">পণ্যটি সরাতে চান?</h3><p class="text-sm text-gray-500 mt-1">পণ্যটি কার্ট থেকে সরানো হবে।</p>
+    <div class="flex gap-2 mt-5"><button onclick="closeRemove()" class="flex-1 py-2.5 rounded-xl border border-gray-200 font-bold text-gray-600">না, থাক</button><button onclick="closeRemove()" class="flex-1 py-2.5 rounded-xl bg-osco-red text-white font-bold">হ্যাঁ, সরান</button></div>
+  </div>
+</div>
+<div id="login" class="fixed inset-0 z-[70] hidden items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeLogin()"></div><div class="relative w-full max-w-sm bg-white rounded-3xl p-6 pop-in"><div class="flex justify-center mb-3"><img src="./img/logo.webp" class="h-11"></div><h3 class="font-bold text-lg text-center">লগইন / রেজিস্টার</h3><p class="text-xs text-gray-500 text-center mb-4">মোবাইল নম্বর দিয়ে চালিয়ে যান</p><div class="flex items-center border border-gray-200 rounded-xl overflow-hidden mb-3"><span class="px-3 py-3 bg-gray-100 text-gray-600 text-sm font-semibold">+৮৮</span><input inputmode="numeric" placeholder="01XXXXXXXXX" class="flex-1 px-3 py-3 outline-none text-sm"></div><button onclick="closeLogin()" class="w-full py-3 rounded-full bg-osco-green text-white font-extrabold">OTP পাঠান</button></div></div>
+
+<!-- ==================== FLOATING CONTACT FAB (speed-dial, আর্ক) ==================== -->
+<div class="fixed right-5 bottom-[104px] md:bottom-7 z-40">
+  <div id="fab-opts" class="absolute right-1 bottom-1">
+    <a href="https://wa.me/8801700000000" title="WhatsApp" class="fab-item w-11 h-11 rounded-full bg-osco-green text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5s-.2.3-.3.5l-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1.2-.2.7-.8.9-1 .2-.3.4-.2.6-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3.1.1.1.6-.1 1.1z"/></svg></a>
+    <a href="tel:+8801700000000" title="কল করুন" class="fab-item w-11 h-11 rounded-full bg-osco-blue text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2z"/></svg></a>
+    <a href="https://m.me/oscobrand" title="Messenger" class="fab-item w-11 h-11 rounded-full bg-osco-blue-dark text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m22 2-7 20-4-9-9-4z"/></svg></a>
+    <button type="button" onclick="fabComplain()" title="অভিযোগ" class="fab-item w-11 h-11 rounded-full bg-osco-yellow text-gray-900 grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4H4a2 2 0 0 0-2 2v14l4-4h12a2 2 0 0 0 2-2v-3M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></button>
+    <button type="button" onclick="fabLogin()" title="লগইন" class="fab-item w-11 h-11 rounded-full bg-osco-red text-white grid place-items-center shadow-lg"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+  </div>
+  <div class="relative w-14 h-14">
+    <span class="absolute inset-0 rounded-full bg-osco-green/30 animate-ping"></span>
+    <button id="fab-btn" onclick="toggleFab()" class="relative w-14 h-14 rounded-full bg-osco-green hover:bg-osco-green-dark text-white grid place-items-center shadow-xl">
+      <svg id="fab-ic-chat" class="absolute transition-opacity duration-200" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.5-.7L3 21l1.4-4.4A8.4 8.4 0 1 1 21 11.5z"/><path stroke-linecap="round" d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
+      <svg id="fab-ic-close" class="absolute transition-opacity duration-200 opacity-0" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+
+  // ==== floating contact FAB (speed-dial, আর্ক) ====
+  let fabOpen = false;
+  function toggleFab(){
+    fabOpen = !fabOpen;
+    $('fab-opts').classList.toggle('fab-open', fabOpen);
+    $('fab-ic-chat').classList.toggle('opacity-0', fabOpen);
+    $('fab-ic-close').classList.toggle('opacity-0', !fabOpen);
+  }
+  function fabLogin(){ toggleFab(); openLogin(); }
+  function fabComplain(){ toggleFab(); openContact(); }
+
+  // ==== কার্ডের "কার্টে যোগ করুন" বাটন → quantity স্টেপার (হলুদ বর্ডার) ====
+  (function(){
+    const bn = n => n.toLocaleString('bn-BD');
+    function makeStepper(addBtn){
+      let qty = 1;
+      const box = document.createElement('div');
+      box.className = 'mt-2 w-full flex items-center justify-between border-2 border-osco-yellow rounded-full h-9 px-1 bg-white';
+      box.innerHTML =
+        '<button type="button" data-act="dec" class="w-8 h-8 grid place-items-center text-gray-500 hover:text-osco-red">'+
+          '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/></svg></button>'+
+        '<span data-c class="text-sm font-bold text-gray-800">'+bn(1)+' কার্টে</span>'+
+        '<button type="button" data-act="inc" class="w-8 h-8 grid place-items-center text-osco-green">'+
+          '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg></button>';
+      const c = box.querySelector('[data-c]');
+      box.querySelector('[data-act="inc"]').onclick = () => { qty++; c.textContent = bn(qty)+' কার্টে'; };
+      box.querySelector('[data-act="dec"]').onclick = () => { qty--; if (qty<=0) box.replaceWith(addBtn); else c.textContent = bn(qty)+' কার্টে'; };
+      return box;
+    }
+    document.querySelectorAll('button.bg-osco-yellow.w-full').forEach(btn => {
+      if (!/কার্টে যোগ/.test(btn.textContent)) return;
+      btn.addEventListener('click', () => btn.replaceWith(makeStepper(btn)));
+    });
+  })();
+  function overlay(on){ const o=$('overlay'); o.classList.toggle('opacity-0',!on); o.classList.toggle('pointer-events-none',!on); document.body.style.overflow=on?'hidden':''; }
+  function closeAll(){ $('sidemenu').classList.add('-translate-x-full'); $('cart').classList.add('translate-x-full'); $('wallet').classList.add('translate-x-full'); overlay(false); }
+  function openCart(){ $('cart').classList.remove('translate-x-full'); overlay(true); }
+  function openMenu(){ $('sidemenu').classList.remove('-translate-x-full'); overlay(true); }
+  function openWallet(){ $('wallet').classList.remove('translate-x-full'); overlay(true); }
+  function openContact(){ $('contact').classList.remove('hidden'); $('contact').classList.add('flex'); }
+  function closeContact(){ $('contact').classList.add('hidden'); $('contact').classList.remove('flex'); }
+  function openLogin(){ closeContact(); $('login').classList.remove('hidden'); $('login').classList.add('flex'); }
+  function closeLogin(){ $('login').classList.add('hidden'); $('login').classList.remove('flex'); }
+  function focusSearch(){ scrollTo({top:0,behavior:'smooth'}); toggleSearch(true); }
+  function toggleSearch(forceOpen){ const m=$('msearch'); if(!m) return; const open=forceOpen===true?true:!m.classList.contains('open'); m.classList.toggle('open',open); if(open) setTimeout(()=>m.querySelector('input')?.focus(),200); }
+  function toggleSub(btn){ const wrap=btn.closest('.sub-wrap'); const sub=wrap.querySelector('.submenu'); const isOpen=sub.classList.contains('open'); document.querySelectorAll('.sub-wrap').forEach(w=>{ w.querySelector('.submenu').classList.remove('open'); w.classList.remove('sub-open'); }); if(!isOpen){ sub.classList.add('open'); wrap.classList.add('sub-open'); } }
+  function openRemove(){ $('removepop').classList.remove('hidden'); $('removepop').classList.add('flex'); }
+  function closeRemove(){ $('removepop').classList.add('hidden'); $('removepop').classList.remove('flex'); }
+  function toggleCoupon(btn){ const wrap=btn.closest('.coupon-wrap'); const body=wrap.querySelector('.coupon-body'); const open=!body.classList.contains('open'); body.classList.toggle('open',open); wrap.classList.toggle('cpn-open',open); if(open) setTimeout(()=>wrap.querySelector('input')?.focus(),200); }
+  function oscoSlide(btn,dir){ const wrap=btn.closest('.osco-slider'); const track=wrap&&wrap.querySelector('.slider-track'); if(!track) return; track.scrollBy({left:dir*Math.min(track.clientWidth*0.85,260),behavior:'smooth'}); }
+  function doSearch(e){ e.preventDefault(); location.href='category.html?q='+encodeURIComponent(e.target.querySelector('input').value.trim()); return false; }
+
+  // gallery — মূল এরিয়াতে ছবি বা ভিডিও দেখায়
+  const GAL_VID='8cxNeMmti9Y';
+  function galSelect(el){ document.querySelectorAll('.thumb').forEach(t=>{t.classList.remove('border-osco-green');t.classList.add('border-gray-200');}); if(el){ el.classList.add('border-osco-green'); el.classList.remove('border-gray-200'); } }
+  // থাম্বে ছবি ক্লিক → মূল এরিয়ায় ছবি
+  function setImg(src, el){ $('mainmedia').innerHTML='<img class="max-h-full object-contain transition-opacity duration-200" src="'+src+'">'; galSelect(el); }
+  // ভিডিও থাম্বে ক্লিক → মূল এরিয়ায় ভিডিও থাম্বনেইল (ক্লিকে play)
+  function showGalleryVideo(el){ $('mainmedia').innerHTML='<div onclick="playGalleryVideo(\''+GAL_VID+'\')" class="absolute inset-0 cursor-pointer group bg-black"><img src="https://img.youtube.com/vi/'+GAL_VID+'/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute inset-0 bg-black/25 grid place-items-center"><span class="w-16 h-16 rounded-full bg-white/90 grid place-items-center shadow-lg group-hover:scale-110 transition"><svg width="28" height="28" fill="currentColor" class="text-osco-red ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span></div>'; galSelect(el); }
+  // মূল এরিয়ায় ভিডিও play (iframe, autoplay)
+  function playGalleryVideo(id){ $('mainmedia').innerHTML='<iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" title="OSCO video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'; }
+  // weight pills
+  function pickWeight(el){ document.querySelectorAll('.wbtn').forEach(b=>{b.classList.remove('border-osco-green','bg-green-50','text-osco-green');b.classList.add('border-gray-200','bg-white','text-gray-600');}); el.classList.add('border-osco-green','bg-green-50','text-osco-green'); el.classList.remove('border-gray-200','bg-white','text-gray-600'); }
+  // qty
+  let q=1; function qty(d){ q=Math.max(1,q+d); $('qtyval').textContent=['০','১','২','৩','৪','৫','৬','৭','৮','৯','১০'][q]||q; }
+
+  // sticky buy bar: show when main buttons scroll above viewport
+  const mainbtns=$('mainbtns'), sticky=$('sticky');
+  addEventListener('scroll',()=>{ const show=mainbtns.getBoundingClientRect().bottom<0; sticky.style.transform=show?'translateY(0)':'translateY(100%)';
+    // header hide on scroll down
+    const y=scrollY,down=y>lastY&&y>120; $('header').style.transform=down?'translateY(-120%)':'translateY(0)'; if($('bottomnav'))$('bottomnav').style.transform=down?'translateY(120%)':'translateY(0)'; lastY=y;
+  },{passive:true});
+  let lastY=0;
+
+  // ==== কাস্টমার রিভিউ স্ক্রিনশট গ্যালারি (auto-scroll) ====
+  (function(){
+    const track=$('rev-track'); if(!track) return;
+    let timer;
+    window.revGo=(dir)=>{
+      const step=Math.min(track.clientWidth*0.7, 300);
+      const maxScroll=track.scrollWidth-track.clientWidth;
+      if(dir>0 && track.scrollLeft>=maxScroll-4) track.scrollTo({left:0,behavior:'smooth'});      // শেষে গেলে শুরুতে
+      else if(dir<0 && track.scrollLeft<=4) track.scrollTo({left:maxScroll,behavior:'smooth'});    // শুরুতে থাকলে শেষে
+      else track.scrollBy({left:dir*step,behavior:'smooth'});
+      restart();
+    };
+    function restart(){ clearInterval(timer); timer=setInterval(()=>window.revGo(1),3000); }
+    restart();
+    const car=$('rev-carousel');
+    car.addEventListener('mouseenter',()=>clearInterval(timer));
+    car.addEventListener('mouseleave',restart);
+    track.addEventListener('touchstart',()=>clearInterval(timer),{passive:true});
+  })();
+</script>
+</body>
+</html>
