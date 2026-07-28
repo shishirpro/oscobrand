@@ -236,14 +236,16 @@
 <aside id="wallet" class="drawer fixed top-0 right-0 h-full w-[88%] max-w-sm bg-gray-50 z-50 translate-x-full flex flex-col"><div class="p-4 bg-osco-blue text-white flex items-center justify-between"><h3 class="font-bold text-lg">💳 My Wallet</h3><button onclick="closeAll()" class="p-1"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="p-4"><div class="rounded-2xl p-5 text-white shadow-lg" style="background:linear-gradient(120deg,#1560bd,#16a34a)"><p class="text-sm opacity-90">Current Balance</p><p class="text-3xl font-extrabold mt-1">৳250</p></div></div><div class="px-4 pb-1 text-sm font-bold text-gray-600">Transaction History</div><div class="flex-1 overflow-y-auto px-4 pb-4 space-y-2"><div class="flex items-center justify-between bg-white rounded-xl p-3 shadow-sm"><div><p class="text-[13px] font-semibold text-gray-800">Sign-up Bonus</p><p class="text-[11px] text-gray-400">2026-07-01</p></div><span class="font-bold text-osco-green">+৳250</span></div></div></aside>
 <aside id="cart" class="drawer fixed top-0 right-0 h-full w-full max-w-md bg-gray-50 z-50 translate-x-full flex flex-col">
   <div class="p-3 bg-white border-b flex items-center justify-between shadow-sm border-b-gray-200"><h3 class="font-bold text-lg flex items-center gap-2">🛒 Your Cart <span class="text-xs bg-osco-red text-white px-2 py-0.5 rounded-full">2</span></h3><button onclick="closeAll()" class="p-1"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-  <!-- progress + gift (sticky top) -->
-  <div class="bg-white px-3 py-3 border-b border-b-gray-200">
-    <div class="text-[12.5px] text-gray-700 leading-snug">You got <b class="text-osco-green-dark">৳80</b> discount today, order just <b class="text-osco-red">৳1640</b> more to unlock <b>৳150</b> Special Bonus — total <b>৳230</b> off, confirm your order.</div>
-    <div class="mt-2 h-2.5 rounded-full bg-gray-200 overflow-hidden"><div class="progress-fill h-full rounded-full" style="width:18%"></div></div>
-    <div class="mt-2 flex items-center justify-between text-[12px]"><span class="flex items-center gap-1 text-gray-400">🎁 Gift (৳1000+ এ Free)</span><span class="font-bold text-osco-green-dark">You saved ৳80</span></div>
+  <!-- progress + gift (scroll down এ hide, up এ show) -->
+  <div id="cartprog" class="bg-white px-3 border-b border-b-gray-200 overflow-hidden transition-all duration-300" style="max-height:200px">
+    <div class="py-3">
+      <div class="text-[12.5px] text-gray-700 leading-snug">You got <b class="text-osco-green-dark">৳80</b> discount today, order just <b class="text-osco-red">৳1640</b> more to unlock <b>৳150</b> Special Bonus — total <b>৳230</b> off, confirm your order.</div>
+      <div class="mt-2 h-2.5 rounded-full bg-gray-200 overflow-hidden"><div class="progress-fill h-full rounded-full" style="width:18%"></div></div>
+      <div class="mt-2 flex items-center justify-between text-[12px]"><span class="flex items-center gap-1 text-gray-400">🎁 Gift (৳1000+ এ Free)</span><span class="font-bold text-osco-green-dark">You saved ৳80</span></div>
+    </div>
   </div>
   <!-- lines + suggestions -->
-  <div class="flex-1 overflow-y-auto">
+  <div id="cartscroll" class="flex-1 min-h-0 overflow-y-auto">
     <div class="p-3">
       <!-- cart line -->
       <div class="flex gap-3 p-3 bg-white rounded-xl border border-gray-100 mb-2">
@@ -386,6 +388,27 @@
   function overlay(on){ const o=$('overlay'); o.classList.toggle('opacity-0',!on); o.classList.toggle('pointer-events-none',!on); document.body.style.overflow=on?'hidden':''; }
   function closeAll(){ $('sidemenu').classList.add('-translate-x-full'); $('cart').classList.add('translate-x-full'); $('wallet').classList.add('translate-x-full'); overlay(false); }
   function openCart(){ $('cart').classList.remove('translate-x-full'); overlay(true); }
+  // cart drawer: scroll down এ progress+gift hide, up এ show
+  (function(){
+    const sc=$('cartscroll'), pg=$('cartprog'); if(!sc||!pg) return;
+    let last=0, hidden=false, anchor=0, locked=false, ticking=false;
+    function setP(h){ if(h===hidden||locked) return; hidden=h; locked=true;
+      pg.style.maxHeight = h ? '0px' : '200px'; pg.style.opacity = h ? '0' : '1'; pg.style.borderWidth = h ? '0px' : '';
+      setTimeout(()=>{ locked=false; last=sc.scrollTop; anchor=0; }, 320);   // transition শেষ হলে আবার active
+    }
+    function onScroll(){
+      ticking=false;
+      if(window.innerWidth>=1024){ setP(false); return; }   // desktop এ hide বন্ধ
+      if(locked){ return; }                                 // animation চলাকালীন ignore
+      const y=sc.scrollTop;
+      if(y<=4){ setP(false); anchor=0; last=y; return; }    // একদম উপরে → সবসময় show
+      if((y>last)!==(anchor>0)) anchor=0;                    // দিক বদলালে reset
+      anchor += y-last; last=y;
+      if(anchor>40) setP(true);                             // নিচে যথেষ্ট নামলে hide
+      else if(anchor<-40) setP(false);                      // উপরে যথেষ্ট উঠলে show
+    }
+    sc.addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } },{passive:true});
+  })();
   function openMenu(){ $('sidemenu').classList.remove('-translate-x-full'); overlay(true); }
   function openWallet(){ $('wallet').classList.remove('translate-x-full'); overlay(true); }
   function openContact(){ $('contact').classList.remove('hidden'); $('contact').classList.add('flex'); }
