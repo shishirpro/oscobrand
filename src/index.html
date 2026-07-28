@@ -915,18 +915,23 @@
   // cart drawer: scroll down এ progress+gift hide, up এ show
   (function(){
     const sc=$('cartscroll'), pg=$('cartprog'); if(!sc||!pg) return;
-    let last=0, hidden=false, anchor=0;
-    function setP(h){ if(h===hidden) return; hidden=h; pg.style.maxHeight = h ? '0px' : '200px'; pg.style.opacity = h ? '0' : '1'; pg.style.borderWidth = h ? '0px' : ''; }
-    sc.addEventListener('scroll',()=>{
+    let last=0, hidden=false, anchor=0, locked=false, ticking=false;
+    function setP(h){ if(h===hidden||locked) return; hidden=h; locked=true;
+      pg.style.maxHeight = h ? '0px' : '200px'; pg.style.opacity = h ? '0' : '1'; pg.style.borderWidth = h ? '0px' : '';
+      setTimeout(()=>{ locked=false; last=sc.scrollTop; anchor=0; }, 320);   // transition শেষ হলে আবার active
+    }
+    function onScroll(){
+      ticking=false;
       if(window.innerWidth>=1024){ setP(false); return; }   // desktop এ hide বন্ধ
+      if(locked){ return; }                                 // animation চলাকালীন ignore
       const y=sc.scrollTop;
-      const dir = y>last ? 1 : -1;
-      if((dir>0)!==(anchor>0)) anchor=0;      // দিক বদলালে anchor reset
-      anchor += y-last;
-      if(anchor>28 && y>40) setP(true);       // নিচে যথেষ্ট নামলে hide
-      else if(anchor<-28) setP(false);        // উপরে যথেষ্ট উঠলে show
-      last=y;
-    },{passive:true});
+      if(y<=4){ setP(false); anchor=0; last=y; return; }    // একদম উপরে → সবসময় show
+      if((y>last)!==(anchor>0)) anchor=0;                    // দিক বদলালে reset
+      anchor += y-last; last=y;
+      if(anchor>40) setP(true);                             // নিচে যথেষ্ট নামলে hide
+      else if(anchor<-40) setP(false);                      // উপরে যথেষ্ট উঠলে show
+    }
+    sc.addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } },{passive:true});
   })();
   function openMenu(){ $('sidemenu').classList.remove('-translate-x-full'); overlay(true); }
   function openWallet(){ $('wallet').classList.remove('translate-x-full'); overlay(true); }
