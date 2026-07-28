@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="./output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-900 pt-[64px] pb-[190px] lg:pb-6">
+<body class="bg-gray-50 text-gray-900 pt-[120px] pb-[190px] lg:pb-6">
 
 <!-- OVERLAY -->
 <div id="overlay" onclick="closeAll()" class="overlay fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none"></div>
@@ -19,16 +19,15 @@
     <a href="index.html"><img src="./img/logoNew.jpeg" class="h-9 md:h-11 w-auto object-contain"></a>
     <div class="flex items-center gap-1.5 text-osco-green font-semibold text-sm"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="hidden sm:inline">Secure Checkout</span></div>
   </div>
-</header>
-
-<!-- DISCOUNT PROGRESS + GIFT -->
-<div class="bg-white border-b border-b-gray-200">
-  <div class="max-w-6xl mx-auto px-3 md:px-4 py-3">
-    <div class="text-[12.5px] text-gray-700 leading-snug">You got <b class="text-osco-green-dark">৳80</b> discount today, order just <b class="text-osco-red">৳1640</b> more to unlock <b>৳150</b> Special Bonus — total <b>৳230</b> off, confirm your order.</div>
-    <div class="mt-2 h-2.5 rounded-full bg-gray-200 overflow-hidden"><div class="progress-fill h-full rounded-full" style="width:18%"></div></div>
-    <div class="mt-2 flex items-center justify-between text-[12px]"><span class="flex items-center gap-1 text-gray-400">🎁 Gift (৳1000+ এ Free)</span><span class="font-bold text-osco-green-dark">You saved ৳80</span></div>
+  <!-- DISCOUNT PROGRESS + GIFT (header এর সাথেই fixed, scroll এ একসাথে hide/show) -->
+  <div class="bg-white border-t border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-3 md:px-4 py-3">
+      <div class="text-[12.5px] text-gray-700 leading-snug">You got <b class="text-osco-green-dark">৳80</b> discount today, order just <b class="text-osco-red">৳1640</b> more to unlock <b>৳150</b> Special Bonus — total <b>৳230</b> off, confirm your order.</div>
+      <div class="mt-2 h-2.5 rounded-full bg-gray-200 overflow-hidden"><div class="progress-fill h-full rounded-full" style="width:18%"></div></div>
+      <div class="mt-2 flex items-center justify-between text-[12px]"><span class="flex items-center gap-1 text-gray-400">🎁 Gift (৳1000+ এ Free)</span><span class="font-bold text-osco-green-dark">You saved ৳80</span></div>
+    </div>
   </div>
-</div>
+</header>
 
 <main class="max-w-6xl mx-auto px-3 md:px-4 mt-4">
   <div class="flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:items-start">
@@ -184,10 +183,11 @@
     const hd=$('ckheader');
     if(!hd) return;
     let last=window.scrollY, hidden=false;
-    const cb=$('cbwrap');
+    // body padding = header (with progress) height, so content শুরু ঠিক নিচে
+    function fit(){ document.body.style.paddingTop = hd.offsetHeight + 'px'; }
+    fit(); addEventListener('resize', fit, {passive:true});
     function setH(h){ if(h===hidden) return; hidden=h;
       hd.style.transform = h ? 'translateY(-100%)' : 'translateY(0)';
-      if(cb){ cb.style.maxHeight = h ? '0px' : cb.scrollHeight+'px'; cb.style.opacity = h ? '0' : '1'; cb.style.borderWidth = h ? '0px' : ''; }
     }
     addEventListener('scroll',()=>{
       const y=window.scrollY;
