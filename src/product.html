@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="./output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-900 pt-[70px] md:pt-[116px] pb-[70px] md:pb-6">
+<body class="bg-gray-50 text-gray-900 pt-[70px] md:pt-[116px] pb-[70px] md:pb-6 overflow-x-hidden">
 
 <!-- OVERLAY -->
 <div id="overlay" onclick="closeAll()" class="overlay fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none"></div>
@@ -157,11 +157,38 @@
     <div class="border-b border-gray-200 flex gap-4 text-sm font-bold">
       <span class="py-2 border-b-2 border-osco-green text-osco-green">Description</span>
     </div>
-    <div class="py-4 text-[14px] leading-relaxed text-gray-700">
-      <p class="mb-2">This OSCO Brand product is 100% chemical-free and naturally processed. Sun-dried using natural methods — full of taste and nutrition.</p>
-      <ul class="list-disc pl-5 space-y-1 text-gray-600"><li>100% Chemical-free & Natural</li><li>Sun-dried, natural processing</li><li>Safe & healthy for family</li><li>Premium quality packaging</li></ul>
-      <p class="mt-3 text-[13px] text-gray-500">Factory: Godown Road, Bonarpara, Saghata, Gaibandha</p>
+    <div class="relative">
+      <div id="descBody" class="py-4 text-[14px] leading-relaxed text-gray-700 overflow-hidden transition-all duration-500" style="max-height:220px">
+        <p class="mb-2">This OSCO Brand product is 100% chemical-free and naturally processed. Sun-dried using natural methods — full of taste and nutrition. প্রতিটি দানা হাতে বাছাই করে প্যাকেট করা হয় যাতে গুণগত মান বজায় থাকে।</p>
+        <ul class="list-disc pl-5 space-y-1 text-gray-600 mb-3"><li>100% Chemical-free & Natural</li><li>Sun-dried, natural processing</li><li>Safe & healthy for family</li><li>Premium quality packaging</li><li>কোনো কৃত্রিম রং বা প্রিজারভেটিভ নেই</li><li>ফাইবার ও পুষ্টিগুণে ভরপুর</li></ul>
+
+        <h4 class="font-bold text-gray-800 mt-4 mb-1.5">🌾 পণ্যের বিশেষত্ব</h4>
+        <p class="mb-2 text-gray-600">আমাদের চাল সরাসরি কৃষকের কাছ থেকে সংগ্রহ করা হয়। কোনো মধ্যস্বত্বভোগী ছাড়াই সরাসরি প্রক্রিয়াজাত করা হয় বলে দাম থাকে সাশ্রয়ী এবং মান থাকে সেরা। প্রাকৃতিক রোদে শুকানো হয় বলে ভাত হয় ঝরঝরে ও সুগন্ধযুক্ত।</p>
+
+        <h4 class="font-bold text-gray-800 mt-4 mb-1.5">📦 প্যাকেজিং ও সংরক্ষণ</h4>
+        <p class="mb-2 text-gray-600">ফুড-গ্রেড প্যাকেটে এয়ার-টাইট সিল করা হয় যাতে আর্দ্রতা ও পোকামাকড় থেকে সুরক্ষিত থাকে। শুকনো ও ঠান্ডা জায়গায় সংরক্ষণ করুন। খোলার পর মুখ ভালোভাবে বন্ধ করে রাখুন।</p>
+
+        <h4 class="font-bold text-gray-800 mt-4 mb-1.5">🍚 রান্নার পরামর্শ</h4>
+        <ul class="list-disc pl-5 space-y-1 text-gray-600 mb-2"><li>রান্নার আগে ২-৩ বার ধুয়ে নিন</li><li>১ কাপ চালে ১.৫ কাপ পানি ব্যবহার করুন</li><li>মাঝারি আঁচে রান্না করলে ঝরঝরে ভাত হয়</li></ul>
+
+        <table class="w-full text-[13px] border border-gray-200 rounded-lg overflow-hidden mt-4 mb-2">
+          <tbody>
+            <tr class="border-b border-gray-100"><td class="py-2 px-3 bg-gray-50 font-semibold text-gray-700 w-1/2">Origin</td><td class="py-2 px-3 text-gray-600">Gaibandha, Bangladesh</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 px-3 bg-gray-50 font-semibold text-gray-700">Type</td><td class="py-2 px-3 text-gray-600">Premium Natural Rice</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 px-3 bg-gray-50 font-semibold text-gray-700">Shelf Life</td><td class="py-2 px-3 text-gray-600">12 months</td></tr>
+            <tr><td class="py-2 px-3 bg-gray-50 font-semibold text-gray-700">Processing</td><td class="py-2 px-3 text-gray-600">Sun-dried, Chemical-free</td></tr>
+          </tbody>
+        </table>
+
+        <p class="mt-3 text-[13px] text-gray-500">Factory: Godown Road, Bonarpara, Saghata, Gaibandha</p>
+      </div>
+      <!-- fade overlay (collapsed অবস্থায় দেখা যাবে) -->
+      <div id="descFade" class="absolute bottom-0 inset-x-0 h-16 bg-linear-to-t from-white to-transparent pointer-events-none transition-opacity duration-300"></div>
     </div>
+    <button id="descBtn" onclick="toggleDesc(this)" class="mx-auto mt-2 flex items-center gap-1.5 px-5 py-2 rounded-full border border-osco-green/40 text-osco-green font-bold text-sm shadow-md hover:shadow-lg hover:bg-green-50 transition">
+      <span class="descBtn-txt">See More</span>
+      <svg class="descBtn-chev w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" d="m6 9 6 6 6-6"/></svg>
+    </button>
   </section>
 
   <!-- RELATED -->
@@ -262,7 +289,6 @@
         </div>
         <button onclick="openRemove()" class="self-start text-gray-300 hover:text-osco-red p-1"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
       </div>
-      <a href="index.html" class="block text-center py-2 text-osco-green font-bold text-sm border border-osco-green/30 rounded-xl mt-1">＋ Continue Shopping</a>
       <!-- totals (scroll, items er niche) -->
       <div class="bg-white rounded-xl border border-gray-100 p-3 mt-2 space-y-1 text-sm">
         <div class="flex justify-between text-gray-600"><span>Subtotal</span><span>৳325</span></div>
@@ -299,6 +325,9 @@
           <a href="product.html" class="shrink-0 w-28 bg-white border border-gray-100 rounded-xl p-2 shadow-sm"><img src="./img/product5.webp" class="w-full h-20 object-contain"><p class="text-[11px] font-semibold clamp-2 mt-1 leading-tight">নাজিরশাইল চাল</p><p class="text-osco-green font-bold text-[12px] mt-0.5">৳1750</p><button type="button" class="sugg-add mt-1.5 w-full h-9 flex items-center justify-center gap-1 border-2 border-osco-yellow text-gray-900 font-bold text-[11px] rounded-full"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>Add</button></a>
           <a href="product.html" class="shrink-0 w-28 bg-white border border-gray-100 rounded-xl p-2 shadow-sm"><img src="./img/product2.webp" class="w-full h-20 object-contain"><p class="text-[11px] font-semibold clamp-2 mt-1 leading-tight">প্রাকৃতিক মধু</p><p class="text-osco-green font-bold text-[12px] mt-0.5">৳350</p><button type="button" class="sugg-add mt-1.5 w-full h-9 flex items-center justify-center gap-1 border-2 border-osco-yellow text-gray-900 font-bold text-[11px] rounded-full"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>Add</button></a>
         </div>
+      </div>
+      <div class="px-3 pt-3">
+        <a href="index.html" class="block text-center py-2 text-osco-green font-bold text-sm border border-osco-green/30 rounded-xl mt-1">＋ Continue Shopping</a>
       </div>
     </div>
   </div>
@@ -421,6 +450,7 @@
   function openRemove(){ $('removepop').classList.remove('hidden'); $('removepop').classList.add('flex'); }
   function closeRemove(){ $('removepop').classList.add('hidden'); $('removepop').classList.remove('flex'); }
   function toggleCoupon(btn){ const wrap=btn.closest('.coupon-wrap'); const body=wrap.querySelector('.cpn-body'); const open=body.classList.contains('hidden'); body.classList.toggle('hidden',!open); wrap.classList.toggle('cpn-open',open); if(open) setTimeout(()=>wrap.querySelector('input')?.focus(),50); }
+  function toggleDesc(btn){ const body=$('descBody'), fade=$('descFade'); const open=body.dataset.open==='1'; if(open){ body.style.maxHeight='220px'; fade.style.opacity='1'; btn.querySelector('.descBtn-txt').textContent='See More'; btn.querySelector('.descBtn-chev').style.transform=''; body.dataset.open='0'; body.scrollIntoView({block:'nearest',behavior:'smooth'}); } else { body.style.maxHeight=body.scrollHeight+'px'; fade.style.opacity='0'; btn.querySelector('.descBtn-txt').textContent='See Less'; btn.querySelector('.descBtn-chev').style.transform='rotate(180deg)'; body.dataset.open='1'; } }
   function oscoSlide(btn,dir){ const wrap=btn.closest('.osco-slider'); const track=wrap&&wrap.querySelector('.slider-track'); if(!track) return; track.scrollBy({left:dir*Math.min(track.clientWidth*0.85,260),behavior:'smooth'}); }
   function doSearch(e){ e.preventDefault(); location.href='category.html?q='+encodeURIComponent(e.target.querySelector('input').value.trim()); return false; }
 
