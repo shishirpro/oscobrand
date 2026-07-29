@@ -41,6 +41,19 @@
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* weight-pill strip: right-edge scroll hint (JS toggles .has-more) */
+.wscroll-wrap { position: relative; }
+.wscroll-arrow {
+  position: absolute; top: 0; bottom: 0; right: -2px;
+  display: grid; place-items: center; width: 34px;
+  color: var(--color-osco-red); pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), #fff 60%);
+  opacity: 0; transition: opacity .2s ease;
+}
+.wscroll-wrap.has-more .wscroll-arrow { opacity: 1; }
+@keyframes wnudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+.wscroll-wrap.has-more .wscroll-arrow svg { animation: wnudge 1.1s ease-in-out infinite; }
+
 /* line clamp */
 .clamp-2 { display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 
